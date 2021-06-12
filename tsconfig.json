@@ -11,6 +11,12 @@
     "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": false,
+    "paths": {
+      "ngx-golden-layout": [
+        "dist/ngx-golden-layout/ngx-golden-layout",
+        "dist/ngx-golden-layout"
+      ]
+    },
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",

@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
-import { ControlsComponent } from './controls.component';
-import { GoldenLayoutHostComponent } from './golden-layout-host.component';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from "@angular/core";
+import { ControlsComponent } from "./controls.component";
+import { GoldenLayoutHostComponent } from "./golden-layout-host.component";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
       <app-controls #controls></app-controls>
       <app-golden-layout-host #goldenLayoutHost></app-golden-layout-host>   
@@ -16,28 +16,31 @@ import { GoldenLayoutHostComponent } from './golden-layout-host.component';
         display: flex;
         flex-direction: row;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  title = 'golden-layout-ng-app';
+  title = "golden-layout-ng-app";
 
   private _controlsElement: HTMLElement;
   private _windowResizeListener = () => this.handleWindowResizeEvent();
 
-  @ViewChild('controls') private _controlsComponent: ControlsComponent; 
-  @ViewChild('goldenLayoutHost') private _goldenLayoutHostComponent: GoldenLayoutHostComponent; 
+  @ViewChild("controls") private _controlsComponent: ControlsComponent;
+  @ViewChild("goldenLayoutHost")
+  private _goldenLayoutHostComponent: GoldenLayoutHostComponent;
 
   ngAfterViewInit() {
     this._controlsElement = this._controlsComponent.element;
-    this._controlsComponent.setGoldenLayoutHostComponent(this._goldenLayoutHostComponent);
+    this._controlsComponent.setGoldenLayoutHostComponent(
+      this._goldenLayoutHostComponent
+    );
 
-    globalThis.addEventListener('resize', this._windowResizeListener);
+    globalThis.addEventListener("resize", this._windowResizeListener);
     setTimeout(() => this.resizeGoldenLayout(), 0);
   }
 
   ngOnDestroy() {
-    globalThis.removeEventListener('resize', this._windowResizeListener);
+    globalThis.removeEventListener("resize", this._windowResizeListener);
   }
 
   private handleWindowResizeEvent() {
@@ -49,6 +52,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     const bodyWidth = document.body.offsetWidth;
     const controlsWidth = this._controlsElement.offsetWidth;
     const height = document.body.offsetHeight;
-    this._goldenLayoutHostComponent.setSize(bodyWidth - controlsWidth, height)
+    this._goldenLayoutHostComponent.setSize(bodyWidth - controlsWidth, height);
   }
 }

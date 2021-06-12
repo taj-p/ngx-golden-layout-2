@@ -1,22 +1,26 @@
-import { Component, Inject } from '@angular/core';
-import { ComponentContainer, JsonValue } from 'golden-layout';
-import { BaseComponentDirective } from './base-component.directive';
+import { Component, Inject } from "@angular/core";
+import { ComponentContainer, JsonValue } from "golden-layout";
+import { BaseComponentDirective } from "ngx-golden-layout";
 
 @Component({
-  selector: 'app-text-component',
+  selector: "app-text-component",
   template: `
     <input #input id="input" type="text" [value]="initialValue" (input)="updateValue(input.value)">
   `,
-  styles: [`#input { display: block; }`]
+  styles: [`#input { display: block; }`],
 })
 export class TextComponent extends BaseComponentDirective {
   private _value: string;
   public initialValue: string;
 
-  constructor(@Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken) private container: ComponentContainer) {
+  constructor(
+    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
+    private container: ComponentContainer
+  ) {
     super();
 
-    this.container.stateRequestEvent = () => this.handleContainerStateRequestEvent();
+    this.container.stateRequestEvent = () =>
+      this.handleContainerStateRequestEvent();
 
     const state = this.container.initialState;
     let textValue: string;
@@ -24,7 +28,7 @@ export class TextComponent extends BaseComponentDirective {
       textValue = TextComponent.undefinedTextValue;
     } else {
       if (!JsonValue.isJson(state)) {
-        textValue = '<Unexpect type>';
+        textValue = "<Unexpect type>";
       } else {
         const textState: TextComponent.State = state as TextComponent.State;
         textValue = textState.text;
@@ -55,8 +59,8 @@ export class TextComponent extends BaseComponentDirective {
 }
 
 export namespace TextComponent {
-  export const undefinedTextValue = '<undefined>';
+  export const undefinedTextValue = "<undefined>";
 
-  type TextPropertyName = 'text';
-  export type State = { [propertyName in TextPropertyName]: string }
+  type TextPropertyName = "text";
+  export type State = { [propertyName in TextPropertyName]: string };
 }

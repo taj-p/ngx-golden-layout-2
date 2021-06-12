@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ComponentContainer } from 'golden-layout';
-import { BaseComponentDirective } from './base-component.directive';
+import { BaseComponentDirective } from 'ngx-golden-layout';
 
 @Component({
   selector: 'app-color-component',

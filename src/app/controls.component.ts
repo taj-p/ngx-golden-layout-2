@@ -4,7 +4,7 @@ import {
   GoldenLayout,
   LayoutConfig,
   ResolvedLayoutConfig } from "golden-layout";
-import { GoldenLayoutComponentService } from './golden-layout-component.service';
+import { GoldenLayoutComponentService } from 'ngx-golden-layout';
 import { GoldenLayoutHostComponent } from './golden-layout-host.component';
 import { predefinedLayoutNames, predefinedLayouts } from './predefined-layouts';
 import { TextComponent } from './text.component';
