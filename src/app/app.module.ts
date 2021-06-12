@@ -6,14 +6,12 @@ import { AppComponent } from "./app.component";
 import { BooleanComponent } from "./boolean.component";
 import { ColorComponent } from "./color.component";
 import { ControlsComponent } from "./controls.component";
-import { GoldenLayoutHostComponent } from "./golden-layout-host.component";
 import { TextComponent } from "./text.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlsComponent,
-    GoldenLayoutHostComponent,
     TextComponent,
     ColorComponent,
     BooleanComponent,

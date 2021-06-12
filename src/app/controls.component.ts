@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {
   DragSource,
   GoldenLayout,
   LayoutConfig,
-  ResolvedLayoutConfig } from "golden-layout";
-import { GoldenLayoutComponentService } from 'ngx-golden-layout';
-import { GoldenLayoutHostComponent } from './golden-layout-host.component';
-import { predefinedLayoutNames, predefinedLayouts } from './predefined-layouts';
-import { TextComponent } from './text.component';
-import { ColorComponent } from "./color.component";
+  ResolvedLayoutConfig
+} from "golden-layout";
+import {GoldenLayoutComponentService, GoldenLayoutHostComponent} from 'ngx-golden-layout';
+import {ColorComponent} from "./color.component";
+import {predefinedLayoutNames, predefinedLayouts} from './predefined-layouts';
+import {TextComponent} from './text.component';
 
 @Component({
   selector: 'app-controls',

@@ -1,6 +1,4 @@
-import { Component, Inject } from "@angular/core";
-import { ComponentContainer } from "golden-layout";
-import { BaseComponentDirective } from "ngx-golden-layout";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-boolean-component",
@@ -13,11 +11,7 @@ export class BooleanComponent {
   private value: boolean;
   public initialValue: boolean;
 
-  constructor(
-    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
-    private container: ComponentContainer
-  ) {
-    console.log(this.container.title);
+  constructor() {
     const state = true;
     this.value = state as boolean;
     this.initialValue = this.value;

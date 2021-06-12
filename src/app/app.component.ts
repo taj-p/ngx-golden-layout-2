@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from "@angular/core";
 import { ControlsComponent } from "./controls.component";
-import { GoldenLayoutHostComponent } from "./golden-layout-host.component";
+import { GoldenLayoutHostComponent } from "ngx-golden-layout";
 
 @Component({
   selector: "app-root",
