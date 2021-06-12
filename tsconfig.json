@@ -12,10 +12,7 @@
     "sourceMap": true,
     "declaration": false,
     "paths": {
-      "ngx-golden-layout": [
-        "dist/ngx-golden-layout/ngx-golden-layout",
-        "dist/ngx-golden-layout"
-      ]
+      "ngx-golden-layout": ["./projects/ngx-golden-layout/src/public-api.ts"]
     },
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -23,10 +20,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
