@@ -19,39 +19,16 @@ import { GoldenLayoutHostComponent } from "./golden-layout-host.component";
     `,
   ],
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
+export class AppComponent implements AfterViewInit {
   title = "golden-layout-ng-app";
-
-  private _controlsElement: HTMLElement;
-  private _windowResizeListener = () => this.handleWindowResizeEvent();
 
   @ViewChild("controls") private _controlsComponent: ControlsComponent;
   @ViewChild("goldenLayoutHost")
   private _goldenLayoutHostComponent: GoldenLayoutHostComponent;
 
   ngAfterViewInit() {
-    this._controlsElement = this._controlsComponent.element;
     this._controlsComponent.setGoldenLayoutHostComponent(
       this._goldenLayoutHostComponent
     );
-
-    globalThis.addEventListener("resize", this._windowResizeListener);
-    setTimeout(() => this.resizeGoldenLayout(), 0);
-  }
-
-  ngOnDestroy() {
-    globalThis.removeEventListener("resize", this._windowResizeListener);
-  }
-
-  private handleWindowResizeEvent() {
-    // handling of resize event is required if GoldenLayout does not use body element
-    this.resizeGoldenLayout();
-  }
-
-  private resizeGoldenLayout() {
-    const bodyWidth = document.body.offsetWidth;
-    const controlsWidth = this._controlsElement.offsetWidth;
-    const height = document.body.offsetHeight;
-    this._goldenLayoutHostComponent.setSize(bodyWidth - controlsWidth, height);
   }
 }
