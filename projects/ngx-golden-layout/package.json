@@ -1,9 +1,10 @@
 {
   "name": "ngx-golden-layout",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^12.0.3",
-    "@angular/core": "^12.0.3"
+    "@angular/core": "^12.0.3",
+    "golden-layout": "^2.0.2"
   },
   "dependencies": {
     "tslib": "^2.1.0"
