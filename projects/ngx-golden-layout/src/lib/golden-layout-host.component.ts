@@ -60,16 +60,10 @@ export class GoldenLayoutHostComponent implements OnDestroy {
   }
 
   private handleWindowResizeEvent() {
-    // handling of resize event is required if GoldenLayout does not use body element
-    const host = document.getElementsByTagName(GOLDEN_LAYOUT_TAG_NAME);
-
-    if (!host[0]) {
-      throw new Error(
-        `Cannot find an element of tag ${GOLDEN_LAYOUT_TAG_NAME}.`
-      );
-    }
-
-    this._goldenLayout.setSize(host[0].clientWidth, host[0].clientHeight);
+    this._goldenLayout.setSize(
+      this._elRef.nativeElement.clientWidth,
+      this._elRef.nativeElement.clientHeight
+    );
   }
 
   private handleGetComponentEvent(
