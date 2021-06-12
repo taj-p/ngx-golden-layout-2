@@ -11,7 +11,6 @@ import {
   GoldenLayout,
   ResolvedComponentItemConfig,
 } from "golden-layout";
-import { BaseComponentDirective } from "./base-component.directive";
 import { GoldenLayoutComponentService } from "./golden-layout-component.service";
 
 export const GOLDEN_LAYOUT_TAG_NAME = "golden-layout-host";
@@ -31,10 +30,7 @@ export const GOLDEN_LAYOUT_TAG_NAME = "golden-layout-host";
 })
 export class GoldenLayoutHostComponent implements OnDestroy {
   private _goldenLayout: GoldenLayout;
-  private _containerMap = new Map<
-    ComponentContainer,
-    ComponentRef<BaseComponentDirective>
-  >();
+  private _containerMap = new Map<ComponentContainer, ComponentRef<any>>();
   private _windowResizeListener = () => this.handleWindowResizeEvent();
 
   get goldenLayout() {

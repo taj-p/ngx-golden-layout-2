@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { ComponentContainer, JsonValue } from "golden-layout";
-import { BaseComponentDirective } from "ngx-golden-layout";
+import { GoldenLayoutContainerInjectionToken } from "ngx-golden-layout";
 
 @Component({
   selector: "app-text-component",
@@ -9,16 +9,14 @@ import { BaseComponentDirective } from "ngx-golden-layout";
   `,
   styles: [`#input { display: block; }`],
 })
-export class TextComponent extends BaseComponentDirective {
+export class TextComponent {
   private _value: string;
   public initialValue: string;
 
   constructor(
-    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
+    @Inject(GoldenLayoutContainerInjectionToken)
     private container: ComponentContainer
   ) {
-    super();
-
     this.container.stateRequestEvent = () =>
       this.handleContainerStateRequestEvent();
 

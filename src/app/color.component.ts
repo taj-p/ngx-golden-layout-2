@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ComponentContainer } from 'golden-layout';
-import { BaseComponentDirective } from 'ngx-golden-layout';
+import { GoldenLayoutContainerInjectionToken } from 'ngx-golden-layout';
 
 @Component({
   selector: 'app-color-component',
@@ -16,16 +16,14 @@ import { BaseComponentDirective } from 'ngx-golden-layout';
   `
   ]
 })
-export class ColorComponent extends BaseComponentDirective {
+export class ColorComponent {
 
   public title: string;
   public color: string;
   public initialColor: string;
   public id: string;
 
-  constructor(@Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken) private container: ComponentContainer) {
-    super();
-
+  constructor(@Inject(GoldenLayoutContainerInjectionToken) private container: ComponentContainer) {
     this.title = this.container.title;
     this.id = this.container.parent.id;
 
