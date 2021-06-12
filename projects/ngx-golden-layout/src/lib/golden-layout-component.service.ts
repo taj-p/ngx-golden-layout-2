@@ -34,16 +34,16 @@ export class GoldenLayoutComponentService {
     }
   }
 
+  /**
+   * Returns a list of all the registered component type names.
+   */
   getRegisteredComponentTypeNames(): string[] {
-    const count = this._componentTypeMap.size;
-    const result = new Array<string>(count);
-    let idx = 0;
-    for (let [key, _] of this._componentTypeMap) {
-      result[idx++] = key;
-    }
-    return result;
+    return [...this._componentTypeMap.keys()];
   }
 
+  /**
+   * Creates a component in the GoldenLayout component.
+   */
   createComponent(
     componentTypeJsonValue: JsonValue,
     container: ComponentContainer
@@ -52,7 +52,7 @@ export class GoldenLayoutComponentService {
       componentTypeJsonValue as string
     );
     if (componentType === undefined) {
-      throw new Error("Unknown component type");
+      throw new Error(`Unknown component type of ${componentTypeJsonValue}`);
     } else {
       const provider: StaticProvider = {
         provide: GoldenLayoutContainerInjectionToken,
@@ -61,6 +61,7 @@ export class GoldenLayoutComponentService {
       const injector = Injector.create({
         providers: [provider],
       });
+
       const componentFactoryRef = this.componentFactoryResolver.resolveComponentFactory<
         any
       >(componentType);

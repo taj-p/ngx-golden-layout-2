@@ -50,6 +50,15 @@ export class GoldenLayoutHostComponent implements OnDestroy {
     globalThis.addEventListener("resize", this._windowResizeListener);
   }
 
+  getComponentRef(container: ComponentContainer) {
+    return this._containerMap.get(container);
+  }
+
+  ngOnDestroy() {
+    globalThis.removeEventListener("resize", this._windowResizeListener);
+    this._goldenLayout.destroy();
+  }
+
   private handleWindowResizeEvent() {
     // handling of resize event is required if GoldenLayout does not use body element
     const host = document.getElementsByTagName(GOLDEN_LAYOUT_TAG_NAME);
@@ -61,10 +70,6 @@ export class GoldenLayoutHostComponent implements OnDestroy {
     }
 
     this._goldenLayout.setSize(host[0].clientWidth, host[0].clientHeight);
-  }
-
-  getComponentRef(container: ComponentContainer) {
-    return this._containerMap.get(container);
   }
 
   private handleGetComponentEvent(
@@ -97,10 +102,5 @@ export class GoldenLayoutHostComponent implements OnDestroy {
       componentRef.destroy();
       this._containerMap.delete(container);
     }
-  }
-
-  ngOnDestroy() {
-    globalThis.removeEventListener("resize", this._windowResizeListener);
-    this._goldenLayout.destroy();
   }
 }
