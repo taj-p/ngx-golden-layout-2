@@ -12,7 +12,7 @@ import {
   ResolvedComponentItemConfig,
 } from "golden-layout";
 import { BaseComponentDirective } from "./base-component.directive";
-import { GoldenLayoutComponentService } from "ngx-golden-layout";
+import { GoldenLayoutComponentService } from "./golden-layout-component.service";
 
 @Component({
   selector: "golden-layout-host",

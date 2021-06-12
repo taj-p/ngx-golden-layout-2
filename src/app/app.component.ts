@@ -6,7 +6,7 @@ import { GoldenLayoutHostComponent } from "./golden-layout-host.component";
   selector: "app-root",
   template: `
       <app-controls #controls></app-controls>
-      <app-golden-layout-host #goldenLayoutHost></app-golden-layout-host>   
+      <golden-layout-host #goldenLayoutHost></golden-layout-host>   
   `,
   styles: [
     `

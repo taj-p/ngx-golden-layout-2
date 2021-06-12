@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgxGoldenLayoutModule } from "ngx-golden-layout";
+import { GoldenLayoutComponentService } from "ngx-golden-layout";
 import { AppComponent } from "./app.component";
 import { BooleanComponent } from "./boolean.component";
 import { ColorComponent } from "./color.component";
@@ -17,8 +18,18 @@ import { TextComponent } from "./text.component";
     ColorComponent,
     BooleanComponent,
   ],
-  imports: [BrowserModule, NgxGoldenLayoutModule],
+  imports: [BrowserModule, NgxGoldenLayoutModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(
+    private _goldenLayoutComponentService: GoldenLayoutComponentService
+  ) {
+    this._goldenLayoutComponentService.registerComponentTypes([
+      { name: TextComponent.name, componentType: TextComponent },
+      { name: ColorComponent.name, componentType: ColorComponent },
+      { name: BooleanComponent.name, componentType: BooleanComponent },
+    ]);
+  }
+}

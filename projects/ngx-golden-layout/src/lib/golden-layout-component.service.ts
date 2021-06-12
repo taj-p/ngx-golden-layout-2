@@ -16,6 +16,9 @@ export class GoldenLayoutComponentService {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
+  /**
+   * Register a component with Golden Layout.
+   */
   registerComponentType(
     name: string,
     componentType: Type<BaseComponentDirective>
@@ -23,11 +26,22 @@ export class GoldenLayoutComponentService {
     this._componentTypeMap.set(name, componentType);
   }
 
+  /**
+   * Register a list of components with Golden Layout.
+   */
+  registerComponentTypes(
+    components: { name: string; componentType: Type<BaseComponentDirective> }[]
+  ) {
+    for (const component of components) {
+      this.registerComponentType(component.name, component.componentType);
+    }
+  }
+
   getRegisteredComponentTypeNames(): string[] {
     const count = this._componentTypeMap.size;
     const result = new Array<string>(count);
     let idx = 0;
-    for (let [key, value] of this._componentTypeMap) {
+    for (let [key, _] of this._componentTypeMap) {
       result[idx++] = key;
     }
     return result;
