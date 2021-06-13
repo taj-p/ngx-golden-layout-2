@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
-import { GoldenLayoutHostComponent } from "ngx-golden-layout";
-import { ControlsComponent } from "./controls.component";
+import {
+  GoldenLayoutHostComponent,
+  GoldenLayoutManagerService,
+} from "ngx-golden-layout";
 
 @Component({
   selector: "app-root",
@@ -22,12 +24,15 @@ import { ControlsComponent } from "./controls.component";
 export class AppComponent implements AfterViewInit {
   title = "golden-layout-ng-app";
 
-  @ViewChild("controls") private _controlsComponent: ControlsComponent;
   @ViewChild("goldenLayoutHost")
   private _goldenLayoutHostComponent: GoldenLayoutHostComponent;
 
+  constructor(
+    private _goldenLayoutManagerService: GoldenLayoutManagerService
+  ) {}
+
   ngAfterViewInit() {
-    this._controlsComponent.setGoldenLayoutHostComponent(
+    this._goldenLayoutManagerService.setGoldenLayoutHostComponent(
       this._goldenLayoutHostComponent
     );
   }

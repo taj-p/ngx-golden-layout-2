@@ -43,10 +43,13 @@ export class GoldenLayoutHostComponent implements OnDestroy {
     private goldenLayoutComponentService: GoldenLayoutComponentService
   ) {
     this._goldenLayout = new GoldenLayout(this._elRef.nativeElement);
+
     this._goldenLayout.getComponentEvent = (container, itemConfig) =>
       this.handleGetComponentEvent(container, itemConfig);
+
     this._goldenLayout.releaseComponentEvent = (container) =>
       this.handleReleaseComponentEvent(container);
+
     globalThis.addEventListener("resize", this._windowResizeListener);
   }
 

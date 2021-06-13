@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
-import {
-  DragSource,
+import { DragSource,
   GoldenLayout,
   LayoutConfig,
   ResolvedLayoutConfig
 } from "golden-layout";
-import {GoldenLayoutComponentService, GoldenLayoutHostComponent} from 'ngx-golden-layout';
+import {GoldenLayoutHostComponent, GoldenLayoutManagerService} from 'ngx-golden-layout';
 import {ColorComponent} from "./color.component";
 import {predefinedLayoutNames, predefinedLayouts} from './predefined-layouts';
 import {TextComponent} from './text.component';
@@ -50,7 +49,7 @@ import {TextComponent} from './text.component';
     </section>
     <section id="saveAndReloadLayoutSection">
       <button #saveLayoutButton id="saveLayoutButton" class="control" (click)="handleSaveLayoutButtonClick()">Save Layout</button>
-      <button #reloadSavedLayoutButton 
+      <button #reloadSavedLayoutButton
         id="reloadSavedLayoutButton"
         class="control"
         [disabled]="saveLayoutButtonDisabled === true ? true : null"
@@ -70,9 +69,7 @@ import {TextComponent} from './text.component';
     .control {
       margin: 2px;
     }
-
-    .draggable {
-      cursor: move;
+.draggable { cursor: move;
     }
 
     #addComponentSection {
@@ -93,7 +90,7 @@ import {TextComponent} from './text.component';
     #saveAndReloadLayoutSection {
       display: flex;
       flex-direction: row;
-    } 
+    }
 
     #dragSection {
       display: flex;
@@ -103,8 +100,6 @@ import {TextComponent} from './text.component';
   ]
 })
 export class ControlsComponent implements AfterViewInit, OnDestroy {
-  private _goldenLayoutHostComponent: GoldenLayoutHostComponent
-  private _goldenLayout: GoldenLayout;
   private _savedLayout: ResolvedLayoutConfig | undefined;
 
   private _selectedRegisteredComponentTypeName: string;
@@ -126,7 +121,7 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(private _elRef: ElementRef<HTMLElement>,
-              private _goldenLayoutComponentService: GoldenLayoutComponentService
+              private _goldenLayoutManagerService: GoldenLayoutManagerService
   ) {
   }
 
@@ -137,14 +132,9 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     for (const dragSource of this._dragSources) {
       if (dragSource) {
-        this._goldenLayout.removeDragSource(dragSource);
+        this._goldenLayoutManagerService.goldenLayout.removeDragSource(dragSource);
       }
     }
-  }
-
-  setGoldenLayoutHostComponent(value: GoldenLayoutHostComponent) {
-    this._goldenLayoutHostComponent = value;
-    this._goldenLayout = this._goldenLayoutHostComponent.goldenLayout;
   }
 
   handleRegisteredComponentTypeSelectChange(value: string) {
@@ -157,19 +147,13 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
 
   handleAddComponentButtonClick() {
     const componentType = this._selectedRegisteredComponentTypeName;
-    this._goldenLayout.addComponent(componentType);
+    this._goldenLayoutManagerService.addComponent(componentType);
   }
 
   handleAddTextComponentButtonClick() {
     // this demonstrates how to access created Angular component
-    const goldenLayoutComponent = this._goldenLayout.newComponent(TextComponent.name); // do not set state here
-    const componentRef = this._goldenLayoutHostComponent.getComponentRef(goldenLayoutComponent.container);
-    if (componentRef === undefined) {
-      throw new Error('Unexpected error getting ComponentRef');
-    } else {
-      const textComponent = componentRef.instance as TextComponent;
+    const textComponent = this._goldenLayoutManagerService.addComponent(TextComponent.name) as TextComponent;
       textComponent.setInitialValue(this._componentTextValue);
-    }
   }
 
   handleLayoutSelectChange(value: string) {
@@ -181,12 +165,12 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
     if (selectedLayout === undefined) {
       throw new Error('handleLoadLayoutButtonClick Error');
     } else {
-      this._goldenLayout.loadLayout(selectedLayout.config);
+      this._goldenLayoutManagerService.goldenLayout.loadLayout(selectedLayout.config);
     }
   }
 
   handleSaveLayoutButtonClick() {
-    this._savedLayout = this._goldenLayout.saveLayout();
+    this._savedLayout = this._goldenLayoutManagerService.goldenLayout.saveLayout();
     this.saveLayoutButtonDisabled = false;
   }
 
@@ -195,12 +179,12 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
       throw new Error('No saved layout');
     } else {
       const layoutConfig = LayoutConfig.fromResolved(this._savedLayout);
-      this._goldenLayout.loadLayout(layoutConfig);
+      this._goldenLayoutManagerService.goldenLayout.loadLayout(layoutConfig);
     }
   }
 
   private initialiseControls() {
-    this.registeredComponentTypeNames = this._goldenLayoutComponentService.getRegisteredComponentTypeNames();
+    this.registeredComponentTypeNames = this._goldenLayoutManagerService.getRegisteredComponentTypeNames();
     this._selectedRegisteredComponentTypeName = this.registeredComponentTypeNames[0]
     this.initialRegisteredComponentTypeName = this._selectedRegisteredComponentTypeName;
     this._componentTextValue = this.initialComponentTextValue;
@@ -216,10 +200,6 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
   }
 
   private loadDragSource(title: string, componentName: string, element: ElementRef | undefined): void {
-    if (!this._goldenLayout) {
-      return;
-    }
-
     const config = () => {
       const item: DragSource.ComponentItemConfig = {
         state: undefined,
@@ -228,6 +208,6 @@ export class ControlsComponent implements AfterViewInit, OnDestroy {
       };
       return item;
     };
-    this._dragSources.push(this._goldenLayout.newDragSource(element?.nativeElement, config));
+    this._dragSources.push(this._goldenLayoutManagerService.goldenLayout.newDragSource(element?.nativeElement, config));
   }
 }

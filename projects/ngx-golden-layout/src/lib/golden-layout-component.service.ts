@@ -3,43 +3,19 @@ import {
   Injectable,
   Injector,
   StaticProvider,
-  Type,
 } from "@angular/core";
 import { ComponentContainer, JsonValue } from "golden-layout";
 import { GoldenLayoutContainerInjectionToken } from "ngx-golden-layout";
+import { GoldenLayoutManagerService } from "./golden-layout-manager.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class GoldenLayoutComponentService {
-  private _componentTypeMap = new Map<string, Type<any>>();
-
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
-
-  /**
-   * Register a component with Golden Layout.
-   */
-  registerComponentType(name: string, componentType: Type<any>) {
-    this._componentTypeMap.set(name, componentType);
-  }
-
-  /**
-   * Register a list of components with Golden Layout.
-   */
-  registerComponentTypes(
-    components: { name: string; componentType: Type<any> }[]
-  ) {
-    for (const component of components) {
-      this.registerComponentType(component.name, component.componentType);
-    }
-  }
-
-  /**
-   * Returns a list of all the registered component type names.
-   */
-  getRegisteredComponentTypeNames(): string[] {
-    return [...this._componentTypeMap.keys()];
-  }
+  constructor(
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private _goldenLayoutManagerService: GoldenLayoutManagerService
+  ) {}
 
   /**
    * Creates a component in the GoldenLayout component.
@@ -48,9 +24,10 @@ export class GoldenLayoutComponentService {
     componentTypeJsonValue: JsonValue,
     container: ComponentContainer
   ) {
-    const componentType = this._componentTypeMap.get(
-      componentTypeJsonValue as string
-    );
+    const componentType = this._goldenLayoutManagerService
+      .getRegisteredComponentsMap()
+      .get(componentTypeJsonValue as string);
+
     if (componentType === undefined) {
       throw new Error(`Unknown component type of ${componentTypeJsonValue}`);
     } else {
@@ -62,7 +39,7 @@ export class GoldenLayoutComponentService {
         providers: [provider],
       });
 
-      const componentFactoryRef = this.componentFactoryResolver.resolveComponentFactory<
+      const componentFactoryRef = this._componentFactoryResolver.resolveComponentFactory<
         any
       >(componentType);
       return componentFactoryRef.create(injector);
