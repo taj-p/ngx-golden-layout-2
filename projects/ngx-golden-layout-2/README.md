@@ -2,6 +2,8 @@
 
 This library allows for Angular 12+ applications to easily use [Golden Layout](http://golden-layout.com/).
 
+The package `ngx-golden-layout` has fallen out of maintenance and is now 4 major releases behind Angular and 2 major releases behind `GoldenLayout`.
+
 ## Setup
 
 1. Install this package
