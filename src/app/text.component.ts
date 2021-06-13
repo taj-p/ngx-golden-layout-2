@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { ComponentContainer, JsonValue } from "golden-layout";
-import { GoldenLayoutContainerInjectionToken } from "ngx-golden-layout";
+import { GoldenLayoutContainerInjectionToken } from "ngx-golden-layout-2";
 
 @Component({
   selector: "app-text-component",

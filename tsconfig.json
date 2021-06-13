@@ -12,7 +12,9 @@
     "sourceMap": true,
     "declaration": false,
     "paths": {
-      "ngx-golden-layout": ["./projects/ngx-golden-layout/src/public-api.ts"]
+      "ngx-golden-layout-2": [
+        "./projects/ngx-golden-layout-2/src/public-api.ts"
+      ]
     },
     "downlevelIteration": true,
     "experimentalDecorators": true,

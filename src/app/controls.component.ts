@@ -4,7 +4,7 @@ import { DragSource,
   LayoutConfig,
   ResolvedLayoutConfig
 } from "golden-layout";
-import {GoldenLayoutHostComponent, GoldenLayoutManagerService} from 'ngx-golden-layout';
+import {GoldenLayoutHostComponent, GoldenLayoutManagerService} from 'ngx-golden-layout-2';
 import {ColorComponent} from "./color.component";
 import {predefinedLayoutNames, predefinedLayouts} from './predefined-layouts';
 import {TextComponent} from './text.component';

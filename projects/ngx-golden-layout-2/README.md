@@ -29,7 +29,7 @@ export class AppModule {
 import {
   NgxGoldenLayoutModule,
   GoldenLayoutManagerService,
-} from "ngx-golden-layout";
+} from "ngx-golden-layout-2";
 
 @NgModule({
   ... 
@@ -53,7 +53,7 @@ export class AppModule {
 import {
   GoldenLayoutHostComponent,
   GoldenLayoutManagerService,
-} from "ngx-golden-layout";
+} from "ngx-golden-layout-2";
 
 @Component({
   template: `

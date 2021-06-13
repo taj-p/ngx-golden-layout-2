@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import {
   NgxGoldenLayoutModule,
   GoldenLayoutManagerService,
-} from "ngx-golden-layout";
+} from "ngx-golden-layout-2";
 import { AppComponent } from "./app.component";
 import { BooleanComponent } from "./boolean.component";
 import { ColorComponent } from "./color.component";

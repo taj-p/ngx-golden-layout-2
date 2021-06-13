@@ -5,7 +5,7 @@ import {
   StaticProvider,
 } from "@angular/core";
 import { ComponentContainer, JsonValue } from "golden-layout";
-import { GoldenLayoutContainerInjectionToken } from "ngx-golden-layout";
+import { GoldenLayoutContainerInjectionToken } from "./injection-tokens";
 import { GoldenLayoutManagerService } from "./golden-layout-manager.service";
 
 @Injectable({

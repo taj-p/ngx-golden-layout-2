@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import {
   GoldenLayoutHostComponent,
   GoldenLayoutManagerService,
-} from "ngx-golden-layout";
+} from "ngx-golden-layout-2";
 
 @Component({
   selector: "app-root",

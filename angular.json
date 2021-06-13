@@ -23,8 +23,7 @@
         "@schematics/angular:interceptor": {
           "skipTests": true
         },
-        "@schematics/angular:module": {
-        },
+        "@schematics/angular:module": {},
         "@schematics/angular:pipe": {
           "skipTests": true
         },
@@ -47,13 +46,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -112,23 +106,23 @@
         }
       }
     },
-    "ngx-golden-layout": {
+    "ngx-golden-layout-2": {
       "projectType": "library",
-      "root": "projects/ngx-golden-layout",
-      "sourceRoot": "projects/ngx-golden-layout/src",
+      "root": "projects/ngx-golden-layout-2",
+      "sourceRoot": "projects/ngx-golden-layout-2/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-golden-layout/ng-package.json"
+            "project": "projects/ngx-golden-layout-2/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-golden-layout/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-golden-layout-2/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-golden-layout/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-golden-layout-2/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -136,12 +130,13 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-golden-layout/src/test.ts",
-            "tsConfig": "projects/ngx-golden-layout/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-golden-layout/karma.conf.js"
+            "main": "projects/ngx-golden-layout-2/src/test.ts",
+            "tsConfig": "projects/ngx-golden-layout-2/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-golden-layout-2/karma.conf.js"
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "golden-layout-ng-app"
 }
