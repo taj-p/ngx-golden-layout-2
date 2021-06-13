@@ -1,24 +1,84 @@
-# NgxGoldenLayout
+# NgxGoldenLayout2
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
+This library allows for Angular 12+ applications to easily use [Golden Layout](http://golden-layout.com/).
 
-## Code scaffolding
+## Setup
 
-Run `ng generate component component-name --project ngx-golden-layout` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-golden-layout`.
-> Note: Don't forget to add `--project ngx-golden-layout` or else it will be added to the default project in your `angular.json` file. 
+1. Install this package
 
-## Build
+> npm i ngx-golden-layout-2
 
-Run `ng build ngx-golden-layout` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Add NgxGoldenLayout to your app module
 
-## Publishing
+```
+@NgModule({
+  declarations: [...],
+  imports: [NgxGoldenLayoutModule.forRoot()], // Add this line
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  ...
+}
+```
 
-After building your library with `ng build ngx-golden-layout`, go to the dist folder `cd dist/ngx-golden-layout` and run `npm publish`.
+3. Register all your Ng components with NgxGoldenLayoutModule in AppModule.
 
-## Running unit tests
+```
 
-Run `ng test ngx-golden-layout` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import {
+  NgxGoldenLayoutModule,
+  GoldenLayoutManagerService,
+} from "ngx-golden-layout";
 
-## Further help
+@NgModule({
+  ... 
+  imports: [NgxGoldenLayoutModule.forRoot()],
+  ...
+})
+export class AppModule {
+  constructor(private _goldenLayoutManagerService: GoldenLayoutManagerService) {
+    this._goldenLayoutManagerService.registerComponentTypes([
+      { name: TextComponent.name, componentType: TextComponent },
+      { name: ColorComponent.name, componentType: ColorComponent },
+      { name: BooleanComponent.name, componentType: BooleanComponent },
+    ]);
+  }
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. To your AppComponent (or the component you wish to use GoldenLayout in) set the host component:
+
+```
+import {
+  GoldenLayoutHostComponent,
+  GoldenLayoutManagerService,
+} from "ngx-golden-layout";
+
+@Component({
+  template: `
+      <golden-layout-host #goldenLayoutHost></golden-layout-host>   
+  `,
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild("goldenLayoutHost")
+  private _goldenLayoutHostComponent: GoldenLayoutHostComponent;
+
+  constructor(
+    private _goldenLayoutManagerService: GoldenLayoutManagerService
+  ) {}
+
+  ngAfterViewInit() {
+    this._goldenLayoutManagerService.setGoldenLayoutHostComponent(
+      this._goldenLayoutHostComponent
+    );
+  }
+}
+```
+
+5. Add your components to the GoldenLayout host via...
+
+```
+
+    this._goldenLayoutManagerService.addComponent(componentType);
+```
