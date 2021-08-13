@@ -11,7 +11,9 @@ The package [ngx-golden-layout](https://www.npmjs.com/package/ngx-golden-layout)
 
 To see this package in action, run:
 
-> npm i && npm start
+```
+npm i && npm start
+```
 
 ## Setup
 
@@ -21,7 +23,7 @@ To see this package in action, run:
 
 2. Add NgxGoldenLayout to your app module
 
-```
+```ts
 @NgModule({
   declarations: [...],
   imports: [NgxGoldenLayoutModule.forRoot()], // Add this line
@@ -35,7 +37,7 @@ export class AppModule {
 
 3. Register all your Ng components with NgxGoldenLayoutModule in AppModule.
 
-```
+```ts
 
 import {
   NgxGoldenLayoutModule,
@@ -60,7 +62,7 @@ export class AppModule {
 
 4. To your AppComponent (or the component you wish to use GoldenLayout in) set the host component:
 
-```
+```ts
 import {
   GoldenLayoutHostComponent,
   GoldenLayoutManagerService,
@@ -89,7 +91,7 @@ export class AppComponent implements AfterViewInit {
 
 5. Add your components to the GoldenLayout host via...
 
-```
+```ts
 
     this._goldenLayoutManagerService.addComponent(componentType);
 ```
