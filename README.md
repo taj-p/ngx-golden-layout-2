@@ -19,7 +19,9 @@ npm i && npm start
 
 1. Install this package
 
-> npm i ngx-golden-layout-2 golden-layout
+```
+npm i ngx-golden-layout-2 golden-layout
+```
 
 2. Add NgxGoldenLayout to your app module
 
