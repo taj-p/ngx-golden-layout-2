@@ -1,11 +1,6 @@
 # NgxGoldenLayout2
 
-This library allows for Angular 12+ applications to easily use [Golden Layout](http://golden-layout.com/).
-
-
-## Why version 2?
-
-The package [ngx-golden-layout](https://www.npmjs.com/package/ngx-golden-layout) has fallen out of maintenance and is now 4 major releases behind Angular and 2 major releases behind [GoldenLayout](https://www.npmjs.com/package/golden-layout). The package is also close sourced.
+This library allows for Angular 12+ applications to easily use [Golden Layout](http://golden-layout.com/) version 2.This project is a short term solution to allow the use of Golden Layout 2 in Angular 12 (without needing to ignore peer dependencies), until the [official package](https://github.com/EmbeddedEnterprises/ng6-golden-layout) supports it.
 
 ## Demo
 
